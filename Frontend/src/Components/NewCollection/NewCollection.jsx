@@ -13,7 +13,7 @@ const NewCollection = () => {
   },[])
 
   return (
-    <div className="flex flex-col items-center gap-4 pt-12 m-8 ml-50 w-250  xl:h-[60vh]  md:h-[130vh] sm:h-[100vh]   xl:w-280   lg:w-280  md:w-250 sm:w-250">
+    <div className="flex flex-col items-center gap-4 pt-12 m-8 ml-50 w-250  xl:h-[60vh]  md:h-[130vh] sm:h-[100vh] mb-200   xl:w-280   lg:w-280  md:w-250 sm:w-250">
       <p className="text-amber-950 font-bold text-[60px]">NEW COLLECTION</p>
       <hr className="w-[200px] h-[6px] rounded-[10px] bg-amber-900" />
 
