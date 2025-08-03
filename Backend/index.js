@@ -34,6 +34,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.use('/Images', express.static('upload/Images'));
+
 app.post("/upload", upload.single('product'), (req, res) => {
     res.json({
         success: 1,
@@ -53,15 +54,17 @@ const Product = mongoose.model("Product", {
     available: { type: Boolean, default: true }
 });
 
-// add product
+// ✅ updated: add product
 app.post('/addproduct', async (req, res) => {
     let products = await Product.find({});
     let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
 
+    const imageUrl = `https://ecommerce-shophub-backend-7k6v.onrender.com/Images/${req.body.image}`;
+
     const product = new Product({
         id,
         name: req.body.name,
-        image: req.body.image,
+        image: imageUrl,
         category: req.body.category,
         new_price: req.body.new_price,
         old_price: req.body.old_price,
