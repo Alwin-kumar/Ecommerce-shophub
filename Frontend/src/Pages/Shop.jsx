@@ -3,7 +3,7 @@ import Hero from '../Components/Hero/Hero';
 import Popular from '../Components/Popular/Popular';
 import Offers from '../Components/Offers/Offers';
 import NewCollection from '../Components/NewCollection/NewCollection';
-import Newsletter from '../Components/Newsletter/Newsletter';  // ✅ fixed spelling
+import Newsletter from '../Components/Newletter/Newsletter'
 import Footer from '../Components/Footer/Footer';
 
 const Shop = () => {
