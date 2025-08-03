@@ -19,7 +19,7 @@ import React, { createContext, useEffect, useState } from "react";
     const [cartItems,setCartItems] = useState(getDefaultcart());
 
     useEffect(()=>{
-        fetch('http://localhost:4000/allproducts')
+        fetch('https://ecommerce-shophub-backend-7k6v.onrender.com/allproducts')
         .then((response)=>response.json())
         .then((data)=>setAll_Product(data))
 
