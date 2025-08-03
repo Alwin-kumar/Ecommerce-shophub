@@ -24,7 +24,7 @@ import React, { createContext, useEffect, useState } from "react";
         .then((data)=>setAll_Product(data))
 
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/getcart',{
+            fetch('https://ecommerce-shophub-backend-7k6v.onrender.com/getcart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -43,7 +43,7 @@ import React, { createContext, useEffect, useState } from "react";
     const addToCart = (itemId) =>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}));
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/addtocart',{
+            fetch('https://ecommerce-shophub-backend-7k6v.onrender.com/addtocart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -60,7 +60,7 @@ import React, { createContext, useEffect, useState } from "react";
     const removeFromCart = (itemId) =>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/removefromcart',{
+            fetch('https://ecommerce-shophub-backend-7k6v.onrender.com/removefromcart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
