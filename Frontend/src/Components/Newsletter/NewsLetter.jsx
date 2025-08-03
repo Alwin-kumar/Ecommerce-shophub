@@ -2,7 +2,7 @@ import React from 'react'
 
 const Newsletter = () => {
   return (
-    <div className=' h-[40vh] flex  flex-col mt-200   gap-[20px] justify-center items-center  bg-black w-320   xl:w-378   lg:w-380 md:w-330 sm:w-330'>
+    <div className=' h-[40vh] flex  flex-col mt-96   gap-[20px] justify-center items-center  bg-black w-320   xl:w-378   lg:w-380 md:w-330 sm:w-330'>
         <p className='text-white text-[55px]  font-semibold'> Get Exclusive Offers On Your Email</p>
         <p className='text-white text-[20px] '>Subscribe to Our newsletter and stay updated</p>
         <div className='flex justify-between items-center bg-white w-[730px] rounded-[80px ] border-[1px] border-solid border-b-blue-500 '>
