@@ -12,7 +12,7 @@ const Navbar = () => {
     const {getTotalCartItems} = useContext(ShopContext);
 
   return (
-    <nav className='flex justify-around p-[16px]  w-320 shadow-2xl sticky top-0 bg-[#E195AB] px-2 py-12 text-[18px] h-[85px] lg:px-2 lg:py-10 xl:w-380   lg:w-380 md:w-330 sm:w-330 xl:h-[90px] lg:h-[90px]  '>
+    <nav className='flex justify-around p-[16px]  w-320 shadow-2xl sticky top-0 bg-[#E195AB] px-2 py-12 text-[18px] h-[85px] lg:px-2 lg:py-10 xl:w-380   lg:w-380 md:w-330 sm:w-330 xl:h-[90px] lg:h-[90px] sm:h-[120px]   '>
         <div className='flex items-center gap-10'>
         <img src={Logo} alt="" className='h-[60px] w-16 rounded-full xl:w-15'/>
        </div>
