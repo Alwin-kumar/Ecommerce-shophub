@@ -33,7 +33,7 @@ const ProductDisplay = ({ product }) => {
         </section>
 
         {/* Main Image */}
-        <section className='w-[300px] '>
+        <section className='w-300 '>
           <img
             src={getImageUrl(product.image)}
             alt={product.name}
