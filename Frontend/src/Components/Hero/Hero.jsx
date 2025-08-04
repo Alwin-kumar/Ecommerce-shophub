@@ -5,7 +5,7 @@ import hero_image from '../../Assets/hero_image.png'
 const Hero = () => {
   return (
     <div className=' flex pl-[250px] pr-[100px] pt-10 gap-[20px] items-center justify-between  bg-gradient-to-b from-[#fde1ff] to-[#e1ffea22]
-     to-[60%]  w-320  lg:px-2 lg:py-10  xl:w-378   lg:w-380 md:w-330 sm:w-330  xl:pl-[250px] xl:pr-[100px]  lg:pl-[250px] lg:pr-[100px]'>
+     to-[60%]  w-320  lg:px-2 lg:py-10  xl:w-381   lg:w-381 md:w-330 sm:w-330  xl:pl-[250px] xl:pr-[100px]  lg:pl-[250px] lg:pr-[100px]'>
         <div className='pb-20 m-5'>
         <article>
         <p className='font-bold text-2xl  leading-[1.1]'>NEW ARRIVALS ONLY</p>
