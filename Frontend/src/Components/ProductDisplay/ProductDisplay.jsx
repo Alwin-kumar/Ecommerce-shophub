@@ -18,7 +18,7 @@ const ProductDisplay = ({ product }) => {
   if (!product) return <p className="text-center">Loading product...</p>;
 
   return (
-    <div className='flex flex-col md:flex-row my-14 xl:w-[1512px] w-full px-4'>
+    <div className='flex flex-col md:flex-row my-14 xl:w-378   lg:w-380 md:w-330 sm:w-330  px-4'>
       {/* Side Images */}
       <div className='flex gap-4'>
         <section className='hidden md:flex flex-col gap-4 ml-10'>
