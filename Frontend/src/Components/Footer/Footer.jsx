@@ -7,7 +7,7 @@ import Logo from '../../Assets/logo3.png'
 
 const Footer = () => {
   return (
-    <div className='bg-black  h-[400px] cursor-pointer p-8 w-320  xl:w-381   lg:w-381 md:w-330 sm:w-330 flex flex-col items-center justify-center'>
+    <div className='bg-black  h-[400px] cursor-pointer p-8 w-320  xl:w-380   lg:w-380 md:w-330 sm:w-330 flex flex-col items-center justify-center'>
         <div className='flex items-center gap-10 justify-center'>
             
                 <img src={Logo} alt="" className='h-[60px] w-16 rounded-full'/>
