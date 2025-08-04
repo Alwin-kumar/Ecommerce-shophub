@@ -8,11 +8,12 @@ const ProductDisplay = ({ product }) => {
 
   // fallback image if product.image is broken
   const getImageUrl = (imgPath) => {
-    if (!imgPath) return '';
-    return imgPath.startsWith('http')
-      ? imgPath
-      : `https://ecommerce-shophub-backend-7k6v.onrender.com/${imgPath}`;
-  };
+  if (!imgPath) return '';
+  return imgPath.startsWith('http')
+    ? imgPath
+    : `https://ecommerce-shophub-backend-7k6v.onrender.com/Images/${imgPath}`;
+};
+
 
   if (!product) return <p className="text-center">Loading product...</p>;
 
