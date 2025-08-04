@@ -11,7 +11,7 @@ const Product = () => {
   const {productId} = useParams();
   const product = all_product.find((e)=>e.id === Number(productId))
   return (
-    <div className='xl:w-380   lg:w-382 md:w-330 sm:w-330'>
+    <div >
       <BreadCrums product={product}/>
       <ProductDisplay product={product}/>
       <DescriptionBox />
