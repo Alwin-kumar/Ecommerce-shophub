@@ -27,7 +27,7 @@ const ProductDisplay = ({ product }) => {
               key={i}
               src={getImageUrl(product.image)}
               alt={`product view ${i + 1}`}
-              className='h-[138px] w-60 mb-4 object-cover'
+              className='h-[138px]  mb-4 object-cover '
             />
           ))}
         </section>
