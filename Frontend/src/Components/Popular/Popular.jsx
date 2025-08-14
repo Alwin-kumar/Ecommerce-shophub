@@ -22,7 +22,17 @@ const Popular = () => {
         <hr className='w-[200px] h-[6px] rounded-[10px] bg-amber-900'/>
         <div className='mt-12 gap-12 justify-center grid grid-cols-2 4 xl:grid xl:grid-cols-4 lg:grid lg:grid-cols-4 md:grid md:grid-cols-2 sm:grid sm:grid-cols-2     '>
             {popularProducts.map ((item, i)=>{
-                return <Item  key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price}/>
+                return <Item 
+  key={i} 
+  id={item.id} 
+  name={item.name} 
+  image={item.image.startsWith('http') 
+           ? item.image 
+           : `https://res.cloudinary.com/<cloud_name>/image/upload/${item.image}`} 
+  new_price={item.new_price} 
+  old_price={item.old_price}
+/>
+
             })}
         </div>
     </div>
