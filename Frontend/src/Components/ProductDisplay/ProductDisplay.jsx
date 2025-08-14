@@ -6,38 +6,35 @@ import { ShopContext } from '../../Context/ShopContext';
 const ProductDisplay = ({ product }) => {
   const { addToCart } = useContext(ShopContext);
 
-  // fallback image if product.image is broken
+  // no need to build path, cloudinary already gives full URL
   const getImageUrl = (imgPath) => {
-  if (!imgPath) return '';
-  return imgPath.startsWith('http')
-    ? imgPath
-    : `https://ecommerce-shophub-backend-7k6v.onrender.com/Images/${imgPath}`;
-};
-
+    if (!imgPath) return '';
+    return imgPath.startsWith('http') ? imgPath : `https://res.cloudinary.com/<your_cloud_name>/image/upload/${imgPath}`;
+  };
 
   if (!product) return <p className="text-center">Loading product...</p>;
 
   return (
-    <div className='flex mx-0 my-14 xl:w-380 w-300   lg:w-380 md:w-330 sm:w-330'>
+    <div className='flex mx-0 my-14 xl:w-380 w-300 lg:w-380 md:w-330 sm:w-330'>
       {/* Side Images */}
       <div className='flex gap-4'>
-        <section className='hidden flex-col gap-4  ml-10  md:block '>
+        <section className='hidden flex-col gap-4 ml-10 md:block'>
           {[1, 2, 3, 4].map((_, i) => (
             <img
               key={i}
               src={getImageUrl(product.image)}
               alt={`product view ${i + 1}`}
-              className='h-[138px] w-60  mb-4'
+              className='h-[138px] w-60 mb-4 object-cover'
             />
           ))}
         </section>
 
         {/* Main Image */}
-        <section className='w-120 '>
+        <section className='w-120'>
           <img
             src={getImageUrl(product.image)}
             alt={product.name}
-            
+            className='max-h-[500px] object-contain'
           />
         </section>
       </div>
@@ -67,9 +64,9 @@ const ProductDisplay = ({ product }) => {
 
         {/* Description */}
         <section className='mt-4'>
-          A stylish and comfortable zipper shirt made for everyday wear.
+          {product.description || `A stylish and comfortable zipper shirt made for everyday wear.
           Features a front zipper closure, soft fabric, and a modern fit.
-          Easy to wear and perfect for casual or semi-casual looks.
+          Easy to wear and perfect for casual or semi-casual looks.`}
         </section>
 
         {/* Sizes */}
@@ -79,7 +76,7 @@ const ProductDisplay = ({ product }) => {
             {['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
               <article
                 key={size}
-                className='px-4 py-2 bg-[#fbfbfb] border border-[#ebebeb] cursor-pointer'
+                className='px-4 py-2 bg-[#fbfbfb] border border-[#ebebeb] cursor-pointer hover:border-cyan-600 transition'
               >
                 {size}
               </article>
@@ -89,7 +86,7 @@ const ProductDisplay = ({ product }) => {
 
         {/* Add to Cart Button */}
         <button
-          className='px-5 py-3 w-52 font-bold text-white bg-[#FF4141] mt-8 cursor-pointer'
+          className='px-5 py-3 w-52 font-bold text-white bg-[#FF4141] mt-8 cursor-pointer hover:bg-red-500 transition'
           onClick={() => addToCart(product.id)}
         >
           ADD TO CART
@@ -97,10 +94,10 @@ const ProductDisplay = ({ product }) => {
 
         {/* Category & Tags */}
         <p className='mt-5'>
-          <span className='font-bold'>Category:</span> Women, T-shirt, Croptop
+          <span className='font-bold'>Category:</span> {product.category || 'Women, T-shirt, Croptop'}
         </p>
         <p className='mt-2'>
-          <span className='font-bold'>Tags:</span> Modern, Latest
+          <span className='font-bold'>Tags:</span> {product.tags || 'Modern, Latest'}
         </p>
       </div>
     </div>
