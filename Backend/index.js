@@ -4,7 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import uploadRoute from "./routes/upload.js";
-import productsRoute from "./routes/products.js";
+import productsRoute from "./routes/product.js";
 
 dotenv.config();
 

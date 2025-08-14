@@ -9,7 +9,7 @@ const ProductDisplay = ({ product }) => {
   // no need to build path, cloudinary already gives full URL
   const getImageUrl = (imgPath) => {
     if (!imgPath) return '';
-    return imgPath.startsWith('http') ? imgPath : `https://res.cloudinary.com/<your_cloud_name>/image/upload/${imgPath}`;
+    return imgPath.startsWith('http') ? imgPath : `https://res.cloudinary.com/dozbs0vok/image/upload/${imgPath}`;
   };
 
   if (!product) return <p className="text-center">Loading product...</p>;
