@@ -1,12 +1,13 @@
-require("dotenv").config(); // ✅ Load .env variables
+require("dotenv").config();
 
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
-const path = require("path");
 const cors = require("cors");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 const port = process.env.PORT || 4000;
 
@@ -24,23 +25,22 @@ app.get("/", (req, res) => {
     res.send("Express App is running");
 });
 
-// setup multer for image upload
-const storage = multer.diskStorage({
-    destination: './upload/Images',
-    filename: (req, file, cb) => {
-        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
+// configure cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// multer cloudinary storage
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: "shop_images", // folder name in cloudinary
+        allowed_formats: ["jpg", "jpeg", "png"]
     }
 });
-const upload = multer({ storage: storage });
-
-app.use('/Images', express.static('upload/Images'));
-
-app.post("/upload", upload.single('product'), (req, res) => {
-    res.json({
-        success: 1,
-        image_url: req.file.filename
-    });
-});
+const upload = multer({ storage });
 
 // schema for product
 const Product = mongoose.model("Product", {
@@ -54,17 +54,23 @@ const Product = mongoose.model("Product", {
     available: { type: Boolean, default: true }
 });
 
-// ✅ updated: add product
-app.post('/addproduct', async (req, res) => {
+// upload endpoint → directly to cloudinary
+app.post("/upload", upload.single("product"), (req, res) => {
+    res.json({
+        success: 1,
+        image_url: req.file.path // cloudinary URL
+    });
+});
+
+// add product → image is uploaded in same request
+app.post("/addproduct", upload.single("product"), async (req, res) => {
     let products = await Product.find({});
     let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
-
-    const imageUrl = `https://ecommerce-shophub-backend-7k6v.onrender.com/Images/${req.body.image}`;
 
     const product = new Product({
         id,
         name: req.body.name,
-        image: imageUrl,
+        image: req.file ? req.file.path : req.body.image, // cloudinary URL
         category: req.body.category,
         new_price: req.body.new_price,
         old_price: req.body.old_price,
@@ -75,13 +81,13 @@ app.post('/addproduct', async (req, res) => {
 });
 
 // delete product
-app.post('/removeproduct', async (req, res) => {
+app.post("/removeproduct", async (req, res) => {
     await Product.findOneAndDelete({ id: req.body.id });
     res.json({ success: true, name: req.body.name });
 });
 
 // get all products
-app.get('/allproducts', async (req, res) => {
+app.get("/allproducts", async (req, res) => {
     const products = await Product.find({});
     res.send(products);
 });
@@ -96,7 +102,7 @@ const Users = mongoose.model("Users", {
 });
 
 // signup
-app.post('/signup', async (req, res) => {
+app.post("/signup", async (req, res) => {
     let check = await Users.findOne({ email: req.body.email });
     if (check) {
         return res.status(400).json({ success: false, errors: "existing user found" });
@@ -122,7 +128,7 @@ app.post('/signup', async (req, res) => {
 });
 
 // login
-app.post('/login', async (req, res) => {
+app.post("/login", async (req, res) => {
     const user = await Users.findOne({ email: req.body.email });
     if (user && req.body.password === user.password) {
         const data = { user: { id: user.id } };
@@ -134,14 +140,14 @@ app.post('/login', async (req, res) => {
 });
 
 // get new collection
-app.get('/newcollections', async (req, res) => {
+app.get("/newcollections", async (req, res) => {
     const products = await Product.find({});
     const newcollection = products.slice(1).slice(-8);
     res.send(newcollection);
 });
 
 // get popular women products
-app.get('/popularinwomen', async (req, res) => {
+app.get("/popularinwomen", async (req, res) => {
     const products = await Product.find({ category: "women" });
     const popular_in_women = products.slice(0, 4);
     res.send(popular_in_women);
@@ -149,7 +155,7 @@ app.get('/popularinwomen', async (req, res) => {
 
 // middleware for verifying token
 const fetchUser = async (req, res, next) => {
-    const token = req.header('auth-token');
+    const token = req.header("auth-token");
     if (!token) {
         return res.status(401).send({ errors: "Please authenticate with a valid token" });
     }
@@ -164,7 +170,7 @@ const fetchUser = async (req, res, next) => {
 };
 
 // add to cart
-app.post('/addtocart', fetchUser, async (req, res) => {
+app.post("/addtocart", fetchUser, async (req, res) => {
     let userData = await Users.findOne({ _id: req.user.id });
     userData.cartData[req.body.itemId] += 1;
     await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
@@ -172,7 +178,7 @@ app.post('/addtocart', fetchUser, async (req, res) => {
 });
 
 // remove from cart
-app.post('/removefromcart', fetchUser, async (req, res) => {
+app.post("/removefromcart", fetchUser, async (req, res) => {
     let userData = await Users.findOne({ _id: req.user.id });
     if (userData.cartData[req.body.itemId] > 0) {
         userData.cartData[req.body.itemId] -= 1;
@@ -182,7 +188,7 @@ app.post('/removefromcart', fetchUser, async (req, res) => {
 });
 
 // get cart data
-app.post('/getcart', fetchUser, async (req, res) => {
+app.post("/getcart", fetchUser, async (req, res) => {
     let userData = await Users.findOne({ _id: req.user.id });
     res.json(userData.cartData);
 });
