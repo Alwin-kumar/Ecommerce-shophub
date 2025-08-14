@@ -15,26 +15,26 @@ const ProductDisplay = ({ product }) => {
   if (!product) return <p className="text-center">Loading product...</p>;
 
   return (
-    <div className='flex mx-0 my-14 xl:w-380 w-300 lg:w-380 md:w-330 sm:w-330'>
+    <div className='flex mx-0  xl:w-380 w-300 lg:w-380 md:w-330 sm:w-330'>
       {/* Side Images */}
       <div className='flex gap-4'>
-        <section className='hidden flex-col gap-4 ml-10 md:block'>
+        <section className='hidden flex-col gap-4  md:block'>
           {[1, 2, 3, 4].map((_, i) => (
             <img
               key={i}
               src={getImageUrl(product.image)}
               alt={`product view ${i + 1}`}
-              className='h-[138px] w-60 mb-4 object-cover'
+              className='h-[138px] w-40 ml-5 mt-5 mb-4 '
             />
           ))}
         </section>
 
         {/* Main Image */}
-        <section className='w-120'>
+        <section className='w-159 ml-5 mt-5 mb-4  '>
           <img
             src={getImageUrl(product.image)}
             alt={product.name}
-            className='max-h-[500px] object-contain'
+            
           />
         </section>
       </div>
