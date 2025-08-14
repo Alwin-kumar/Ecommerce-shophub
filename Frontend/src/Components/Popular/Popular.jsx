@@ -9,11 +9,7 @@ const Popular = () => {
 
   const [popularProducts,setPopularProducts] = useState([]);
 
-  useEffect(()=>{
-      fetch('https://ecommerce-shophub-backend-7k6v.onrender.com/popularinwomen')
-      .then((response)=>response.json())
-      .then((data)=>setPopularProducts(data));
-    },[])
+  
 
   return (
     <div className='flex flex-col items-center gap-2.5  pt-30 m-8  md:ml-90 sm:ml-70 lg:ml-50   w-320  xl:w-300   lg:w-300  md:w-180 xl:h-[100vh] md:h-[180vh] sm:w-250'>
