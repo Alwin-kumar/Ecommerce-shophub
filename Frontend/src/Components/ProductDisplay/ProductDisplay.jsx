@@ -30,11 +30,11 @@ const ProductDisplay = ({ product }) => {
         </section>
 
         {/* Main Image */}
-        <section className='w-159 ml-5 mt-5 mb-4  '>
+        <section >
           <img
             src={getImageUrl(product.image)}
             alt={product.name}
-            
+             className='w-200 ml-5 mt-5 mb-4 '
           />
         </section>
       </div>
