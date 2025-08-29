@@ -14,7 +14,8 @@ const Hero = () => {
             <p className='text-[100px]'>New collections <br></br> for everyone</p>
         </article>
         
-            <section className='flex items-center justify-center h-[70px] w-[310px] gap-[15px ] rounded-full mt-[30px] bg-[#ff4141] text-white siz-[22px] font-bold active:bg-blue-600 '>
+            <section className='raise  style={{ "--hover": "#03e9f4" }}  flex items-center justify-center h-[70px] w-[310px] gap-[15px ] rounded-full mt-[30px] bg-[#ff4141] text-white siz-[22px] font-bold active:bg-blue-600 '>
+               
                 Latest Collection
                 <img src={arrow_icon} className='pl-4' />
             </section>

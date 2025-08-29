@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .hover-glow-cyan {
+    transition: text-shadow 0.3s ease, color 0.3s ease;
+  }
+  .hover-glow-cyan:hover {
+    color: #fff;
+    text-shadow: 0 0 5px #03e9f4,
+                 0 0 25px #03e9f4,
+                 0 0 50px #03e9f4,
+                 0 0 100px #03e9f4;
+  }
+}
+
+
+
+@layer utilities {
+  .raise {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .raise:hover,
+  .raise:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover, rgba(0, 0, 0, 0.3));
+    transform: translateY(-0.25em);
+  }
+}
